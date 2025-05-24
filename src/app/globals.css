@@ -2,20 +2,111 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Root variables for consistent dark, professional theme */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #101014;
+  --foreground: #e2e2e6;
+  --accent: #23232d;
+  --accent2: #191923;
+  --link: #b1b6c9;
+  --border: #23232d;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #101014;
+    --foreground: #e2e2e6;
+    --accent: #23232d;
+    --accent2: #191923;
+    --link: #b1b6c9;
+    --border: #23232d;
   }
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  letter-spacing: 0.01em;
+  font-size: 1.08rem;
+  min-height: 100vh;
+  line-height: 1.7;
+}
+
+a {
+  color: var(--link);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color 0.2s;
+}
+a:hover {
+  color: #f5f6fa;
+}
+
+/* For selection */
+::selection {
+  background: #23232d;
+  color: #f8fafc;
+}
+
+/* Scrollbar styling for a subtle, professional look */
+::-webkit-scrollbar {
+  width: 8px;
+  background: var(--accent2);
+}
+::-webkit-scrollbar-thumb {
+  background: #23232d;
+  border-radius: 8px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #29293d;
+}
+
+/* Headings and emphasis for clarity and presence */
+h1, h2, h3, h4, h5, h6 {
+  color: #e5e5ea;
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+strong, b {
+  color: #fafafc;
+  font-weight: 700;
+}
+
+/* Code blocks and inline code for technical clarity */
+code, pre {
+  font-family: var(--font-geist-mono), Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  background: #191923;
+  color: #b1b6c9;
+  padding: 0.1rem 0.3rem;
+  border-radius: 4px;
+  font-size: 0.97em;
+}
+
+/* For pre blocks */
+pre {
+  padding: 1rem;
+  overflow-x: auto;
+  border-radius: 8px;
+  margin: 1.5rem 0;
+}
+
+/* Borders for sections/cards for structure */
+hr, .border, .divide-y > * + * {
+  border-color: var(--border);
+}
+
+/* Fade-in animation for sections */
+.fade-in-section {
+  opacity: 0;
+  transform: translateY(24px);
+  animation: fadeIn 1.2s cubic-bezier(0.24,0.8,0.35,1) 0.2s forwards;
+}
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
