@@ -1,6 +1,41 @@
 "use client";
 import SelectedProjectsSection from "./SelectedProjectsSection";
 
+const careerTimeline = [
+  {
+    year: "2020",
+    label: "Graduated University",
+    icon: "🎓",
+    summary: "Completed BEng in Software Engineering with First Class Honours.",
+    location: "Belfast, Northern Ireland",
+    university: "UUJ",
+  },
+  {
+    year: "2020",
+    label: "Associate Software Engineer",
+    icon: "🐣",
+    summary: "Joined as a graduate. Worked on core API integrations and learned best practices in modern DevOps and agile teams.",
+    location: "Belfast, Northern Ireland",
+    company: "LibertyIT",
+  },
+  {
+    year: "2021",
+    label: "Software Engineer",
+    icon: "🚀",
+    summary: "Led a small team delivering cloud migration projects using AWS and Node.js. Championed CI/CD automation and mentored new team members.",
+    location: "Belfast, Northern Ireland",
+    company: "LibertyIT",
+  },
+  {
+    year: "2023",
+    label: "Senior Software Engineer",
+    icon: "🦄",
+    summary: "Promoted to Senior Engineer. Trusted with leading architecture design, introducing AI-driven features, and guiding engineering initiatives across teams.",
+    location: "Belfast, Northern Ireland",
+    company: "LibertyIT",
+  },
+];
+
 export default function Home() {
   return (
     <div className="min-h-screen grid grid-rows-[auto_1fr_auto] bg-gradient-to-br from-gray-950 via-gray-900 to-gray-800 font-sans relative overflow-hidden">
@@ -18,8 +53,8 @@ export default function Home() {
           <h1 className="text-4xl font-extrabold text-gray-200 tracking-tight drop-shadow-xl text-center uppercase">
             Peter Agnew
           </h1>
-          <h2 className="text-xl text-gray-400 font-semibold tracking-wide shadow-md uppercase">
-            Senior Software Engineer | AWS | Node &amp; TypeScript
+          <h2 className="text-xl text-gray-400 font-semibold tracking-wide shadow-md uppercase flex items-center gap-2">
+            Senior Software Engineer | AWS | Node &amp; TypeScript <span>✨</span>
           </h2>
         </div>
       </header>
@@ -71,62 +106,53 @@ export default function Home() {
             </section>
           </section>
 
-          {/* Timeline Section */}
-          <section className="md:col-span-2 max-w-3xl w-full mx-auto my-10">
-            <h3 className="text-2xl font-bold mb-6 uppercase tracking-wider flex items-center gap-2 text-gray-200">
-              <span className="inline-block w-6 h-6 bg-yellow-700/80 rounded-full"></span>
-              Career Timeline
-            </h3>
-            <ol className="relative border-l-2 border-yellow-900/40 ml-4">
-              <li className="mb-10 ml-6">
-                <span className="absolute -left-3 flex items-center justify-center w-6 h-6 bg-yellow-700/70 rounded-full ring-4 ring-gray-900">
-                  <span className="w-3 h-3 bg-yellow-300 rounded-full block"></span>
-                </span>
-                <div className="pl-2">
-                  <h4 className="font-semibold text-lg text-yellow-200">Graduated University</h4>
-                  <span className="text-gray-400 text-sm">2017</span>
-                  <p className="text-gray-400 mt-1">
-                    Completed BSc in Computer Science with First Class Honours. Built a strong foundation in algorithms, data structures, and software engineering.
-                  </p>
+          {/* Condensed Horizontal Timeline */}
+          <section className="md:col-span-2 w-full mx-auto my-8">
+            {/* Timeline bar */}
+            <div className="relative flex items-center justify-between w-full px-4 py-8">
+              <div className="absolute h-1 bg-yellow-900/40 top-1/2 left-0 right-0 z-0 rounded"></div>
+              {careerTimeline.map((item) => (
+                <div
+                  key={item.label}
+                  className="group flex flex-col items-center z-10 w-1/5 min-w-[68px]"
+                >
+                  {/* Timeline dot with icon */}
+                  <div className="relative flex flex-col items-center">
+                    <div
+                      className="w-10 h-10 bg-yellow-700/80 rounded-full border-4 border-gray-900 flex items-center justify-center text-2xl shadow-lg cursor-pointer transition-transform group-hover:scale-110"
+                      tabIndex={0}
+                    >
+                      {item.icon}
+                    </div>
+                    {/* Hover card/tooltip */}
+                    <div className="absolute left-1/2 transform -translate-x-1/2 top-12 hidden group-hover:block group-focus:block bg-gray-900 text-gray-200 text-sm rounded-lg shadow-lg border border-yellow-700 w-64 p-4 z-20 transition-all duration-200 animate-fadeIn">
+                      <div className="font-semibold text-yellow-200 mb-1 flex items-center gap-1">{item.label}</div>
+                      <div className="text-xs text-gray-400 mb-1">{item.year}</div>
+                      {/* Show company or university and location if present */}
+                      {item.company && (
+                        <div className="text-xs text-blue-400 mb-1 font-semibold">
+                          <span className="mr-1">🏢</span>
+                          {item.company}
+                        </div>
+                      )}
+                      {item.university && (
+                        <div className="text-xs text-green-400 mb-1 font-semibold">
+                          <span className="mr-1">🎓</span>
+                          {item.university}
+                        </div>
+                      )}
+                      {item.location && (
+                        <div className="text-xs text-gray-400 mb-2 flex items-center">
+                          <span className="mr-1">📍</span>{item.location}
+                        </div>
+                      )}
+                      <div className="text-gray-300">{item.summary}</div>
+                    </div>
+                  </div>
+                  <div className="mt-2 text-xs text-gray-400 font-semibold">{item.year}</div>
                 </div>
-              </li>
-              <li className="mb-10 ml-6">
-                <span className="absolute -left-3 flex items-center justify-center w-6 h-6 bg-yellow-700/70 rounded-full ring-4 ring-gray-900">
-                  <span className="w-3 h-3 bg-yellow-300 rounded-full block"></span>
-                </span>
-                <div className="pl-2">
-                  <h4 className="font-semibold text-lg text-yellow-200">Junior Software Engineer, Acme Corp</h4>
-                  <span className="text-gray-400 text-sm">2017 – 2019</span>
-                  <p className="text-gray-400 mt-1">
-                    Joined as a graduate developer. Worked on core API integrations and learned best practices in modern DevOps and agile teams.
-                  </p>
-                </div>
-              </li>
-              <li className="mb-10 ml-6">
-                <span className="absolute -left-3 flex items-center justify-center w-6 h-6 bg-yellow-700/70 rounded-full ring-4 ring-gray-900">
-                  <span className="w-3 h-3 bg-yellow-300 rounded-full block"></span>
-                </span>
-                <div className="pl-2">
-                  <h4 className="font-semibold text-lg text-yellow-200">Software Engineer, Beta Solutions</h4>
-                  <span className="text-gray-400 text-sm">2019 – 2021</span>
-                  <p className="text-gray-400 mt-1">
-                    Led a small team delivering cloud migration projects using AWS and Node.js. Championed CI/CD automation and mentored new team members.
-                  </p>
-                </div>
-              </li>
-              <li className="ml-6">
-                <span className="absolute -left-3 flex items-center justify-center w-6 h-6 bg-yellow-700/70 rounded-full ring-4 ring-gray-900">
-                  <span className="w-3 h-3 bg-yellow-300 rounded-full block"></span>
-                </span>
-                <div className="pl-2">
-                  <h4 className="font-semibold text-lg text-yellow-200">Senior Software Engineer</h4>
-                  <span className="text-gray-400 text-sm">2021 – Present</span>
-                  <p className="text-gray-400 mt-1">
-                    Promoted to Senior Engineer. Trusted with leading architecture design, introducing AI-driven features, and guiding engineering initiatives across teams.
-                  </p>
-                </div>
-              </li>
-            </ol>
+              ))}
+            </div>
           </section>
 
           {/* Key Achievements */}
@@ -235,7 +261,7 @@ export default function Home() {
           to { opacity: 1; transform: none;}
         }
         .animate-fadeIn {
-          animation: fadeIn 1.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+          animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
         }
       `}</style>
     </div>
