@@ -15,11 +15,6 @@ export default function Home() {
 
       <header className="w-full flex justify-center py-10 border-b border-gray-800 bg-gradient-to-br from-gray-950 via-gray-900 to-gray-800/60 backdrop-blur z-10 relative">
         <div className="flex flex-col items-center gap-3">
-          {/* Removed Initials
-          <div className="w-24 h-24 flex items-center justify-center rounded-full border-4 border-gray-800 shadow-xl bg-gradient-to-br from-gray-900 via-gray-800 to-gray-950 text-4xl font-black text-gray-300 select-none animate-spin-slow-slight hover:scale-105 transition-transform duration-300">
-            PA
-          </div>
-          */}
           <h1 className="text-4xl font-extrabold text-gray-200 tracking-tight drop-shadow-xl text-center uppercase">
             Peter Agnew
           </h1>
@@ -37,7 +32,7 @@ export default function Home() {
               Senior Software Engineer with 5+ years of experience driving backend and cloud transformations. Delivers robust, production-grade solutions, mentors teams, and leads technical initiatives that enable business growth.
             </p>
             {/* Seeking New Opportunities moved here, styled to fit in */}
-            <section className="w-full max-w-xl mx-auto mt-8 mb-2 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-950/80 rounded-2xl p-6 border border-yellow-600/30 shadow-lg flex flex-col items-center transition-all duration-300 hover:shadow-2xl">
+            <section className="w-full max-w-xl mx-auto mt-8 mb-2 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-950/80 rounded-2xl p-6 border border-yellow-600/20 shadow transition-all duration-300 flex flex-col items-center">
               <h2 className="text-xl font-bold text-yellow-300 mb-2 flex items-center gap-2 uppercase tracking-wider">
                 <span className="inline-block w-5 h-5 bg-yellow-700/80 rounded-full mr-2"></span>
                 Seeking New Opportunities
@@ -48,7 +43,7 @@ export default function Home() {
               </p>
               <div className="flex gap-3 flex-wrap mt-4">
                 <a
-                  className="inline-flex items-center justify-center px-5 py-2 rounded-full bg-yellow-700/80 hover:bg-yellow-600 text-gray-100 font-bold shadow-sm hover:scale-105 transition-all duration-200 tracking-wide uppercase text-sm"
+                  className="inline-flex items-center justify-center px-5 py-2 rounded-full border border-yellow-700 bg-gray-800 text-gray-300 font-semibold text-base tracking-wide shadow transition-all duration-200 hover:bg-yellow-700/30 hover:text-yellow-100 hover:scale-105"
                   href="mailto:peter.agnew@email.com"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -56,7 +51,7 @@ export default function Home() {
                   Contact Me
                 </a>
                 <a
-                  className="inline-flex items-center justify-center px-5 py-2 rounded-full border-2 border-yellow-700 text-yellow-200 font-bold bg-transparent hover:bg-yellow-800 hover:scale-105 transition-all duration-200 tracking-wide uppercase text-sm"
+                  className="inline-flex items-center justify-center px-5 py-2 rounded-full border border-yellow-700 bg-gray-800 text-gray-300 font-semibold text-base tracking-wide shadow transition-all duration-200 hover:bg-yellow-700/30 hover:text-yellow-100 hover:scale-105"
                   href="https://www.linkedin.com/in/your-linkedin"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -64,7 +59,7 @@ export default function Home() {
                   LinkedIn
                 </a>
                 <a
-                  className="inline-flex items-center justify-center px-5 py-2 rounded-full border-2 border-yellow-700 text-yellow-200 font-bold bg-transparent hover:bg-yellow-800 hover:scale-105 transition-all duration-200 tracking-wide uppercase text-sm"
+                  className="inline-flex items-center justify-center px-5 py-2 rounded-full border border-yellow-700 bg-gray-800 text-gray-300 font-semibold text-base tracking-wide shadow transition-all duration-200 hover:bg-yellow-700/30 hover:text-yellow-100 hover:scale-105"
                   href="/PeterAgnew_Resume.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -74,6 +69,64 @@ export default function Home() {
                 </a>
               </div>
             </section>
+          </section>
+
+          {/* Timeline Section */}
+          <section className="md:col-span-2 max-w-3xl w-full mx-auto my-10">
+            <h3 className="text-2xl font-bold mb-6 uppercase tracking-wider flex items-center gap-2 text-gray-200">
+              <span className="inline-block w-6 h-6 bg-yellow-700/80 rounded-full"></span>
+              Career Timeline
+            </h3>
+            <ol className="relative border-l-2 border-yellow-900/40 ml-4">
+              <li className="mb-10 ml-6">
+                <span className="absolute -left-3 flex items-center justify-center w-6 h-6 bg-yellow-700/70 rounded-full ring-4 ring-gray-900">
+                  <span className="w-3 h-3 bg-yellow-300 rounded-full block"></span>
+                </span>
+                <div className="pl-2">
+                  <h4 className="font-semibold text-lg text-yellow-200">Graduated University</h4>
+                  <span className="text-gray-400 text-sm">2017</span>
+                  <p className="text-gray-400 mt-1">
+                    Completed BSc in Computer Science with First Class Honours. Built a strong foundation in algorithms, data structures, and software engineering.
+                  </p>
+                </div>
+              </li>
+              <li className="mb-10 ml-6">
+                <span className="absolute -left-3 flex items-center justify-center w-6 h-6 bg-yellow-700/70 rounded-full ring-4 ring-gray-900">
+                  <span className="w-3 h-3 bg-yellow-300 rounded-full block"></span>
+                </span>
+                <div className="pl-2">
+                  <h4 className="font-semibold text-lg text-yellow-200">Junior Software Engineer, Acme Corp</h4>
+                  <span className="text-gray-400 text-sm">2017 – 2019</span>
+                  <p className="text-gray-400 mt-1">
+                    Joined as a graduate developer. Worked on core API integrations and learned best practices in modern DevOps and agile teams.
+                  </p>
+                </div>
+              </li>
+              <li className="mb-10 ml-6">
+                <span className="absolute -left-3 flex items-center justify-center w-6 h-6 bg-yellow-700/70 rounded-full ring-4 ring-gray-900">
+                  <span className="w-3 h-3 bg-yellow-300 rounded-full block"></span>
+                </span>
+                <div className="pl-2">
+                  <h4 className="font-semibold text-lg text-yellow-200">Software Engineer, Beta Solutions</h4>
+                  <span className="text-gray-400 text-sm">2019 – 2021</span>
+                  <p className="text-gray-400 mt-1">
+                    Led a small team delivering cloud migration projects using AWS and Node.js. Championed CI/CD automation and mentored new team members.
+                  </p>
+                </div>
+              </li>
+              <li className="ml-6">
+                <span className="absolute -left-3 flex items-center justify-center w-6 h-6 bg-yellow-700/70 rounded-full ring-4 ring-gray-900">
+                  <span className="w-3 h-3 bg-yellow-300 rounded-full block"></span>
+                </span>
+                <div className="pl-2">
+                  <h4 className="font-semibold text-lg text-yellow-200">Senior Software Engineer</h4>
+                  <span className="text-gray-400 text-sm">2021 – Present</span>
+                  <p className="text-gray-400 mt-1">
+                    Promoted to Senior Engineer. Trusted with leading architecture design, introducing AI-driven features, and guiding engineering initiatives across teams.
+                  </p>
+                </div>
+              </li>
+            </ol>
           </section>
 
           {/* Key Achievements */}
