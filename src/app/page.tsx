@@ -87,7 +87,7 @@ export default function Home() {
                 </a>
                 <a
                   className="inline-flex items-center justify-center px-5 py-2 rounded-full border border-yellow-700 bg-gray-800 text-gray-300 font-semibold text-base tracking-wide shadow transition-all duration-200 hover:bg-yellow-700/30 hover:text-yellow-100 hover:scale-105"
-                  href="https://www.linkedin.com/in/your-linkedin"
+                  href="https://www.linkedin.com/in/peter-agnew-b607a1174/"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
