@@ -1,6 +1,8 @@
 "use client";
 import SelectedProjectsSection from "./SelectedProjectsSection";
+import { useState, createContext, useContext } from "react";
 
+// Career timeline data
 const careerTimeline = [
   {
     year: "2020",
@@ -36,10 +38,101 @@ const careerTimeline = [
   },
 ];
 
+// Context for managing open timeline dropdown index
+const TimelineOpenContext = createContext<[number | null, (idx: number | null) => void]>([null, () => {}]);
+function useTimelineOpenState() {
+  return useContext(TimelineOpenContext);
+}
+
+// Timeline dot/card component
+function TimelineDot({ item, idx }: { item: typeof careerTimeline[number]; idx: number }) {
+  const [openIdx, setOpenIdx] = useTimelineOpenState();
+
+  function handleKeyDown(e: React.KeyboardEvent) {
+    if (e.key === "Enter" || e.key === " ") {
+      setOpenIdx(openIdx === idx ? null : idx);
+    }
+  }
+
+  return (
+    <div className="group flex flex-col items-center z-10 min-w-[68px] md:w-1/5">
+      <div className="relative flex flex-col items-center">
+        {/* Timeline dot (always clickable on mobile) */}
+        <div
+          className="w-9 h-9 sm:w-10 sm:h-10 bg-yellow-700/80 rounded-full border-4 border-gray-900 flex items-center justify-center text-xl sm:text-2xl shadow-lg cursor-pointer transition-transform group-hover:scale-110"
+          tabIndex={0}
+          onClick={() => setOpenIdx(openIdx === idx ? null : idx)}
+          onKeyDown={handleKeyDown}
+          aria-expanded={openIdx === idx}
+          aria-controls={`timeline-card-mobile-${idx}`}
+        >
+          {item.icon}
+        </div>
+        {/* Desktop hover/focus tooltip */}
+        <div
+          className={`
+            absolute left-1/2 transform -translate-x-1/2
+            top-10 sm:top-12
+            hidden md:group-hover:block md:group-focus:block
+            bg-gray-900 text-gray-200 text-xs sm:text-sm rounded-lg shadow-lg border border-yellow-700 w-56 sm:w-64 max-w-xs p-3 sm:p-4 z-20
+            transition-all duration-200 animate-fadeIn
+          `}
+        >
+          <TimelineCard item={item} />
+        </div>
+        {/* Mobile dropdown card (shows below dot on click) */}
+        <div
+          id={`timeline-card-mobile-${idx}`}
+          className={`
+            md:hidden
+            ${openIdx === idx ? "block" : "hidden"}
+            mt-4
+            w-64 max-w-xs
+            bg-gray-900 text-gray-200 text-xs rounded-lg shadow-lg border border-yellow-700 p-4 z-20
+            transition-all duration-200 animate-fadeIn
+          `}
+        >
+          <TimelineCard item={item} />
+        </div>
+      </div>
+      <div className="mt-2 text-xs text-gray-400 font-semibold">{item.year}</div>
+    </div>
+  );
+}
+
+function TimelineCard({ item }: { item: typeof careerTimeline[number] }) {
+  return (
+    <>
+      <div className="font-semibold text-yellow-200 mb-1 flex items-center gap-1">{item.label}</div>
+      <div className="text-xs text-gray-400 mb-1">{item.year}</div>
+      {item.company && (
+        <div className="text-xs text-blue-400 mb-1 font-semibold">
+          <span className="mr-1">🏢</span>
+          {item.company}
+        </div>
+      )}
+      {item.university && (
+        <div className="text-xs text-green-400 mb-1 font-semibold">
+          <span className="mr-1">🎓</span>
+          {item.university}
+        </div>
+      )}
+      {item.location && (
+        <div className="text-xs text-gray-400 mb-2 flex items-center">
+          <span className="mr-1">📍</span>{item.location}
+        </div>
+      )}
+      <div className="text-gray-300">{item.summary}</div>
+    </>
+  );
+}
+
 export default function Home() {
+  const [openIdx, setOpenIdx] = useState<number | null>(null);
+
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-br from-gray-950 via-gray-900 to-gray-800 font-sans relative overflow-hidden">
-      {/* Background & header (unchanged) */}
+      {/* Background & header */}
       <div className="pointer-events-none absolute inset-0 z-0 opacity-20">
         <div className="absolute w-[400px] h-[400px] sm:w-[600px] sm:h-[600px] bg-gradient-to-br from-gray-900 via-gray-800 to-black rounded-full blur-[120px] sm:blur-[180px] top-[-100px] sm:top-[-200px] left-[-50px] sm:left-[-250px] animate-spin-slow"></div>
         <div className="absolute w-[200px] h-[200px] sm:w-[400px] sm:h-[400px] bg-gradient-to-br from-gray-700 via-gray-800 to-gray-900 rounded-full blur-[60px] sm:blur-[120px] bottom-[-50px] sm:bottom-[-100px] right-[-50px] sm:right-[-100px]"></div>
@@ -53,7 +146,7 @@ export default function Home() {
           <h1 className="text-2xl sm:text-4xl font-extrabold text-gray-200 tracking-tight drop-shadow-xl text-center uppercase">
             Peter Agnew
           </h1>
-          <h2 className="text-base sm:text-xl text-gray-400 font-semibold tracking-wide shadow-md uppercase flex items-center gap-2">
+          <h2 className="w-full flex justify-center items-center text-base sm:text-xl text-gray-400 font-semibold tracking-wide shadow-md uppercase gap-2 text-center">
             Senior Software Engineer | AWS | Node &amp; TypeScript <span>✨</span>
           </h2>
         </div>
@@ -83,68 +176,20 @@ export default function Home() {
             </section>
           </section>
 
-          {/* Responsive Timeline */}
-{/* Responsive Career Timeline */}
-<section className="md:col-span-2 w-full mx-auto my-6 sm:my-8">
-  {/* This wrapper controls horizontal scroll on mobile and disables it on desktop */}
-  <div className="w-full overflow-x-auto md:overflow-x-visible">
-    {/* 
-      On mobile: flex-nowrap (horizontal scroll)
-      On md+: justify-between to space evenly, no scroll
-    */}
-    <div className="relative flex items-center px-2 py-6 sm:py-8 gap-2 md:gap-0 min-w-[340px] md:min-w-0 flex-nowrap md:justify-between md:flex-nowrap md:w-full">
-      {/* Timeline bar */}
-      <div className="absolute h-1 bg-yellow-900/40 top-1/2 left-0 right-0 z-0 rounded pointer-events-none"></div>
-      {careerTimeline.map((item) => (
-        <div
-          key={item.label}
-          className="group flex flex-col items-center z-10 min-w-[68px] md:w-1/5"
-        >
-          <div className="relative flex flex-col items-center">
-            <div
-              className="w-9 h-9 sm:w-10 sm:h-10 bg-yellow-700/80 rounded-full border-4 border-gray-900 flex items-center justify-center text-xl sm:text-2xl shadow-lg cursor-pointer transition-transform group-hover:scale-110"
-              tabIndex={0}
-            >
-              {item.icon}
-            </div>
-            {/* Tooltip */}
-            <div
-              className={`
-                absolute left-1/2 transform -translate-x-1/2
-                top-10 sm:top-12
-                hidden group-hover:block group-focus:block
-                bg-gray-900 text-gray-200 text-xs sm:text-sm rounded-lg shadow-lg border border-yellow-700 w-56 sm:w-64 max-w-xs p-3 sm:p-4 z-20
-                transition-all duration-200 animate-fadeIn
-              `}
-            >
-              <div className="font-semibold text-yellow-200 mb-1 flex items-center gap-1">{item.label}</div>
-              <div className="text-xs text-gray-400 mb-1">{item.year}</div>
-              {item.company && (
-                <div className="text-xs text-blue-400 mb-1 font-semibold">
-                  <span className="mr-1">🏢</span>
-                  {item.company}
+          {/* Responsive Career Timeline */}
+          <TimelineOpenContext.Provider value={[openIdx, setOpenIdx]}>
+            <section className="md:col-span-2 w-full mx-auto my-6 sm:my-8">
+              <div className="w-full overflow-x-auto md:overflow-x-visible">
+                <div className="relative flex items-center px-2 py-6 sm:py-8 gap-2 md:gap-0 min-w-[340px] md:min-w-0 flex-nowrap md:justify-between md:flex-nowrap md:w-full">
+                  {/* Timeline bar */}
+                  <div className="absolute h-1 bg-yellow-900/40 top-1/2 left-0 right-0 z-0 rounded pointer-events-none"></div>
+                  {careerTimeline.map((item, idx) => (
+                    <TimelineDot item={item} idx={idx} key={item.label} />
+                  ))}
                 </div>
-              )}
-              {item.university && (
-                <div className="text-xs text-green-400 mb-1 font-semibold">
-                  <span className="mr-1">🎓</span>
-                  {item.university}
-                </div>
-              )}
-              {item.location && (
-                <div className="text-xs text-gray-400 mb-2 flex items-center">
-                  <span className="mr-1">📍</span>{item.location}
-                </div>
-              )}
-              <div className="text-gray-300">{item.summary}</div>
-            </div>
-          </div>
-          <div className="mt-2 text-xs text-gray-400 font-semibold">{item.year}</div>
-        </div>
-      ))}
-    </div>
-  </div>
-</section>
+              </div>
+            </section>
+          </TimelineOpenContext.Provider>
 
           {/* Key Achievements */}
           <section className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-950/90 rounded-3xl p-6 sm:p-10 border border-gray-700/60 shadow-xl flex flex-col justify-between space-y-1">
