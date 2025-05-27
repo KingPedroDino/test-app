@@ -55,8 +55,8 @@ function TimelineDot({ item, idx }: { item: typeof careerTimeline[number]; idx: 
   }
 
   return (
-    <div className="group flex flex-col items-center z-10 min-w-[68px] md:w-1/5">
-      <div className="relative flex flex-col items-center">
+    <div className="group flex flex-col items-center z-10 w-full md:w-1/5"> {/* w-full on mobile, even distribution */}
+      <div className="relative flex flex-col items-center w-full">
         {/* Timeline dot (always clickable on mobile) */}
         <div
           className="w-9 h-9 sm:w-10 sm:h-10 bg-yellow-700/80 rounded-full border-4 border-gray-900 flex items-center justify-center text-xl sm:text-2xl shadow-lg cursor-pointer transition-transform group-hover:scale-110"
@@ -81,20 +81,21 @@ function TimelineDot({ item, idx }: { item: typeof careerTimeline[number]; idx: 
           <TimelineCard item={item} />
         </div>
         {/* Mobile dropdown card (shows below dot on click) */}
-        <div
-          id={`timeline-card-mobile-${idx}`}
-          className={`
-            md:hidden
-            ${openIdx === idx ? "block" : "hidden"}
-            absolute left-1/2 -translate-x-1/2 mt-4
-            w-[90vw] max-w-xs
-            bg-gray-900 text-gray-200 text-xs rounded-lg shadow-lg border border-yellow-700 p-4 z-20
-            transition-all duration-200 animate-fadeIn
-          `}
-          style={{ left: '50%', transform: 'translateX(-50%)' }}
-        >
-          <TimelineCard item={item} />
-        </div>
+        {openIdx === idx && (
+          <div
+            id={`timeline-card-mobile-${idx}`}
+            className={`
+              md:hidden
+              mt-4 w-full
+              bg-gray-900 text-gray-200 text-xs rounded-lg shadow-lg border border-yellow-700 p-4 z-20
+              transition-all duration-200 animate-fadeIn
+              mx-auto
+            `}
+            style={{ maxWidth: "95vw" }}
+          >
+            <TimelineCard item={item} />
+          </div>
+        )}
       </div>
       <div className="mt-2 text-xs text-gray-400 font-semibold">{item.year}</div>
     </div>
@@ -180,8 +181,8 @@ export default function Home() {
           {/* Responsive Career Timeline */}
           <TimelineOpenContext.Provider value={[openIdx, setOpenIdx]}>
             <section className="md:col-span-2 w-full mx-auto my-6 sm:my-8">
-              <div className="w-full overflow-x-auto md:overflow-x-visible px-4 md:px-0">
-                <div className="relative flex items-center py-6 sm:py-8 gap-2 md:gap-0 min-w-[340px] md:min-w-0 flex-nowrap md:justify-between md:flex-nowrap md:w-full">
+              <div className="w-full md:overflow-x-visible flex flex-col items-center">
+                <div className="relative flex w-full md:justify-between flex-row items-center py-6 sm:py-8 gap-2 md:gap-0">
                   {/* Timeline bar */}
                   <div className="absolute h-1 bg-yellow-900/40 top-1/2 left-0 right-0 z-0 rounded pointer-events-none"></div>
                   {careerTimeline.map((item, idx) => (
