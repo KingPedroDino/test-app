@@ -171,7 +171,7 @@ export default function Home() {
                 If you’re interested in collaborating or have an opportunity, let’s connect.
               </p>
               <div className="flex gap-2 sm:gap-3 flex-wrap mt-4 justify-center">
-                <a className="inline-flex items-center justify-center px-4 sm:px-5 py-2 rounded-full border border-yellow-700 bg-gray-800 text-gray-300 font-semibold text-sm sm:text-base tracking-wide shadow hover:bg-yellow-700/30 hover:text-yellow-100 hover:scale-105" href="mailto:peter.agnew@email.com" target="_blank" rel="noopener noreferrer">Contact Me</a>
+                <a className="inline-flex items-center justify-center px-4 sm:px-5 py-2 rounded-full border border-yellow-700 bg-gray-800 text-gray-300 font-semibold text-sm sm:text-base tracking-wide shadow hover:bg-yellow-700/30 hover:text-yellow-100 hover:scale-105" href="mailto:peter.agnew103@gmail.com" target="_blank" rel="noopener noreferrer">Contact Me</a>
                 <a className="inline-flex items-center justify-center px-4 sm:px-5 py-2 rounded-full border border-yellow-700 bg-gray-800 text-gray-300 font-semibold text-sm sm:text-base tracking-wide shadow hover:bg-yellow-700/30 hover:text-yellow-100 hover:scale-105" href="https://www.linkedin.com/in/peter-agnew-b607a1174/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
                 <a className="inline-flex items-center justify-center px-4 sm:px-5 py-2 rounded-full border border-yellow-700 bg-gray-800 text-gray-300 font-semibold text-sm sm:text-base tracking-wide shadow hover:bg-yellow-700/30 hover:text-yellow-100 hover:scale-105" href="/PeterAgnew_Resume.pdf" target="_blank" rel="noopener noreferrer" download>Download Resume</a>
               </div>
